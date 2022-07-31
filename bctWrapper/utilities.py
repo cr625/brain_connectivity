@@ -1,30 +1,38 @@
 import argparse
 import os
+from matplotlib.pyplot import get
 import numpy as np
 import bct
 from glob import glob
 
-dirname = os.path.dirname(__file__)
-
-# f = open("/home/chris/cs680/project1/bctWrapper/connectomes/c001_s1.txt", "r")
-
-parser = argparse.ArgumentParser()
-parser.add_argument("-i", "--input", help="input file", required=False)
+# parser = argparse.ArgumentParser()
+# parser.add_argument("-i", "--input", help="input file", required=False)
 
 
-# tempConn = np.loadtxt("/home/chris/cs680/project1/bctWrapper/connectomes/c001_s1.txt")
-#
-# tempConn2 = np.loadtxt(
-#     "/home/chris/cs680/project1/bctWrapper/fmri_connectomes/8315.txt"
-# )
+cwd = os.getcwd()
+connectomes_dir = os.path.join(cwd, "fmri_connectomes")  # pnc dataset connectomes
+subjects_file = os.path.join(
+    cwd, "src/pnc_subjects.txt"
+)  # files parsed subjects to include in the analysis
+
+subject_file_list = sorted(os.listdir(connectomes_dir))
 
 
-fmri_connectomes = os.listdir("/home/chris/cs680/project1/bctWrapper/fmri_connectomes/")
+def add_to_subjects_file(subject_file_list):
+    with open(subjects_file, "w") as f:
+        for subject in subject_file_list:
+            f.write(subject + "\n")
+    f.close()
 
-file_list = sorted(fmri_connectomes)
 
-i = 0
-while i < 100:
-    filename = file_list[i].split(".")[0]
-    print(filename)
-    i += 1
+def get_subjects(n):
+    i = 0
+    subject_list = []
+    while i < n:
+        subject_list.append(subject_file_list[i].split(".")[0])
+        i += 1
+    return subject_list
+
+
+if __name__ == "__main__":
+    add_to_subjects_file(get_subjects(50))
