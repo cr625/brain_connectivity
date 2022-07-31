@@ -1,0 +1,9 @@
+visual
+somatomotor
+dorsal
+ventral
+limbic
+frontoparietal
+default mode
+subcortical
+discard
