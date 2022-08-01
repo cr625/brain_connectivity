@@ -3,3 +3,4 @@ data/PNC
 bctWrapper/fmri_connectomes
 bctWrapper/fmri_timeseries
 bctWrapper/features
+bctWrapper/pnc_fmri_connectomes
