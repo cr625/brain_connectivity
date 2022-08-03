@@ -583,3 +583,4 @@ def drawBarChart(objects,values,xLabel,yLabel,plotTitle,outputPath):
     plt.title(plotTitle)
     plt.savefig(outputPath, transparent=True, dpi=300, bbox_inches='tight')
     plt.close()
+
