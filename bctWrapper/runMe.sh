@@ -4,7 +4,7 @@
 experimentPath=.
 samplePath=$experimentPath/src/pnc_subjects.txt
 measuresList=$experimentPath/src/featureList.txt
-connectomesFolder=$experimentPath/fmri_connectomes
+connectomesFolder=$experimentPath/pnc_fmri_connectomes
 
 systemMaps=$experimentPath/src/Schaefer220.txt
 hemisphereMaps=$experimentPath/src/Yeo_7system_in_Schaefer218_functionalOrder.txt

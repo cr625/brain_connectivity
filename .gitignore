@@ -4,3 +4,7 @@ bctWrapper/fmri_connectomes
 bctWrapper/fmri_timeseries
 bctWrapper/features
 bctWrapper/pnc_fmri_connectomes
+bctWrapper/pnc_dmri_connectomes
+bctWrapper/pnc_fmri_timeseries
+bctWrapper/env
+bctWrapper/__pycache__
