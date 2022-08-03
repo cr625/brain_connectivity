@@ -6,7 +6,7 @@ import os
 import matplotlib.pyplot as plt
 import click
 
-from helpers import heatMap as heat_map
+from helpers import drawCorrelationPlot, heatMap as heat_map
 
 
 
@@ -28,7 +28,7 @@ def get_subject_list(n=50):
 def connectome_file_name(subject):
     return str(subject) + ".txt"
     
-def get_weighted_connectome(subject_id, mri_type):
+def get_weighted_connectome(subject_id, mri_type="fmri"):
     connectome_file = connectome_file_name(subject_id)
     connectome_dir = fmri_connectomes_dir if mri_type == "fmri" else dmri_connectomes_dir
     temp_connectome = os.path.join(connectome_dir, connectome_file)
@@ -36,14 +36,12 @@ def get_weighted_connectome(subject_id, mri_type):
     weighted_connectome = np.array(connectome)
     return weighted_connectome
 
-def get_flat_connectome(subject_id, mri_type):
+def get_flat_connectome(subject_id, mri_type="fmri"):
     connectome_file = str(subject_id) + ".txt"
-    if mri_type == "fmri":
-        temp_connectome = os.path.join(fmri_connectomes_dir, connectome_file)
-    elif mri_type == "dmri":
-        temp_connectome = os.path.join(fmri_connectomes_dir, connectome_file)
-    connectome = np.loadtxt(temp_connectome)
-    return connectome
+    connectome_dir = fmri_connectomes_dir if mri_type == "fmri" else dmri_connectomes_dir
+    temp_connectome = os.path.join(connectome_dir, connectome_file)
+    flat_connectome = np.loadtxt(temp_connectome, max_rows=1)
+    return flat_connectome
 
 
 @click.group()
@@ -63,9 +61,10 @@ cli.add_command(heatmap)
 
 
 if __name__ == "__main__":
-    cli()
+    #cli()
     
     subjects = get_subject_list(5)
-
-
+    fmri_subject_connectome = get_flat_connectome(subjects[0], "fmri")
+    dmri_subject_connectome = get_flat_connectome(subjects[4], "dmri")
+    drawCorrelationPlot(fmri_subject_connectome, dmri_subject_connectome,.4,.05, "fmri", "dmri", "fMRI dMRI Correlation", "pnc_connectome_correlation.png")
  
