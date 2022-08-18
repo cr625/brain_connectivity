@@ -19,11 +19,11 @@ subjects_file = os.path.join(
     cwd, "src/pnc_subjects.txt"
 ) 
 
-def get_subject_list(n=50):
+def get_subject_list(start=0, stop=50):
     with open(subjects_file, "r") as f:
         subject_list = [line.strip() for line in f]
     f.close()
-    return sorted(subject_list[0:n])
+    return sorted(subject_list[start:stop])
 
 def connectome_file_name(subject):
     return str(subject) + ".txt"
@@ -42,6 +42,22 @@ def get_flat_connectome(subject_id, mri_type="fmri"):
     temp_connectome = os.path.join(connectome_dir, connectome_file)
     flat_connectome = np.loadtxt(temp_connectome, max_rows=1)
     return flat_connectome
+
+
+def get_training_connectomes(subject_list, mri_type="fmri"):
+    training_connectomes = []
+    for subject in subject_list:
+        training_connectomes.append(get_weighted_connectome(subject, mri_type))
+    return training_connectomes
+
+def get_test_connectomes(subject_list, mri_type="fmri"):
+    training_connectomes = []
+    for subject in subject_list:
+        training_connectomes.append(get_weighted_connectome(subject, mri_type))
+    return training_connectomes
+
+
+
 
 
 @click.group()
@@ -63,8 +79,23 @@ cli.add_command(heatmap)
 if __name__ == "__main__":
     #cli()
     
-    subjects = get_subject_list(5)
-    fmri_subject_connectome = get_flat_connectome(subjects[0], "fmri")
-    dmri_subject_connectome = get_flat_connectome(subjects[4], "dmri")
-    drawCorrelationPlot(fmri_subject_connectome, dmri_subject_connectome,.4,.05, "fmri", "dmri", "fMRI dMRI Correlation", "pnc_connectome_correlation.png")
- 
+    # subjects = get_subject_list(5)
+    # fmri_subject_connectome = get_flat_connectome(subjects[0], "fmri")
+    # dmri_subject_connectome = get_flat_connectome(subjects[4], "dmri")
+    #drawCorrelationPlot(fmri_subject_connectome, dmri_subject_connectome,.4,.05, "fmri", "dmri", "fMRI dMRI Correlation", "pnc_connectome_correlation.png")
+    
+    def get_by_region():
+        temp = []
+        f_connectome  = get_flat_connectome(2738, "fmri")
+
+        visual = []
+        visual.append(f_connectome[0:13])
+        visual.append(f_connectome[100:114])
+        
+        somatomotor = []
+        dorsal = []
+        ventral = []
+        limbic = []
+        frontopareital = []
+        default_model = []
+        subcortical = []

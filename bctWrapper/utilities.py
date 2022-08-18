@@ -10,7 +10,7 @@ from glob import glob
 
 
 cwd = os.getcwd()
-connectomes_dir = os.path.join(cwd, "fmri_connectomes")  # pnc dataset connectomes
+connectomes_dir = os.path.join(cwd, "pnc_fmri_connectomes")  # pnc dataset connectomes
 subjects_file = os.path.join(
     cwd, "src/pnc_subjects.txt"
 )  # files parsed subjects to include in the analysis
@@ -35,4 +35,4 @@ def get_subjects(n):
 
 
 if __name__ == "__main__":
-    add_to_subjects_file(get_subjects(50))
+    add_to_subjects_file(get_subjects(200))
