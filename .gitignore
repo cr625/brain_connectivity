@@ -8,3 +8,4 @@ bctWrapper/pnc_dmri_connectomes
 bctWrapper/pnc_fmri_timeseries
 bctWrapper/env
 bctWrapper/__pycache__
+bctpy
