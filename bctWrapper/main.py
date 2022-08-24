@@ -111,6 +111,11 @@ def correlation(subject):
     # drawCorrelationPlot(data, output_path)
 
 
+def count_subject_files(connectome_dir):
+    dir_contents = os.listdir(connectome_dir)
+    return len(dir_contents)  # 821h
+
+
 cli.add_command(heatmap)
 cli.add_command(correlation)
 
@@ -118,4 +123,5 @@ if __name__ == "__main__":
 
     subjects = get_subject_list(50)  # 50 subjects in pnc_subjects.txt
     subject = subjects[0]
+
     cli()
